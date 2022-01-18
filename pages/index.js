@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import twitterLogo from '../public/twitter-logo.png';
 import './_app';
 import idl from '../idl.json';
 import {clusterApiUrl, Connection, PublicKey} from '@solana/web3.js';
@@ -8,8 +7,6 @@ import kp from '../keypair.json'
 
 
 // Constants
-const TWITTER_HANDLE = 'solanacomicmeta';
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const TEST_GIFS = [
   'https://media4.giphy.com/media/0eM7G1bPuZCHxH2e6N/giphy.gif?cid=ecf05e47d9jsqp2am8edop8l1h0k9bmjy2xcly454gdpwexn&rid=giphy.gif&ct=g',
   'https://media3.giphy.com/media/3o6nUUWQhsTnwSQWJO/giphy.gif?cid=ecf05e47v2vqyo98ffke3oma3z1zaay3aux3efwvpkd0tm8p&rid=giphy.gif&ct=g',
@@ -174,7 +171,8 @@ export default function Home()
             <form
                 onSubmit={(event) => {
                   event.preventDefault();
-                  sendGif().then(r => console.log(r));
+                  sendGif()
+                      .then(error => console.log(error));
                 }}
             >
               <input
@@ -235,23 +233,13 @@ export default function Home()
         {/* This was solely added for some styling fanciness */}
         <div className={walletAddress ? 'authed-container' : 'container'}>
           <div className="header-container">
-            <p className="header">🖼 Solana Sci-Fi GIF Portal</p>
-            <p className="sub-text">
-              A collection of random sci-fi GIFs ✨
-            </p>
+            <p className="header">🚀 Solana Sci-Fi GIF Portal 🚀</p>
+            <p className="sub-text">A collection of random sci-fi GIFs built on the DevNet ✨</p>
+            <p className="sub-text">Follow me on Twitter @SolanaComicMeta ✨</p>
             {/* Render your connect to wallet button right here.
           Add the condition to show this only if we don't have a wallet address */}
             { !walletAddress && renderNotConnectedContainer() }
             { walletAddress && renderConnectedContainer() }
-          </div>
-          <div className="footer-container">
-            <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
-            <a
-                className="footer-text"
-                href={TWITTER_LINK}
-                target="_blank"
-                rel="noreferrer"
-            >{`built on @${TWITTER_HANDLE}`}</a>
           </div>
         </div>
       </div>
